@@ -162,6 +162,11 @@ class ListNote extends HTMLElement {
   async _deleteNote(noteId) {
     const noteIndex = this._notes.findIndex((note) => note.id === noteId);
     if (noteIndex !== -1) {
+      this._notes.splice(noteIndex, 1);
+      document.dispatchEvent(
+        new CustomEvent("notes-updated", { detail: { notes: this._notes } })
+      );
+      this._renderNotes(this._notes);
       const result = await Swal.fire({
         position: "top-end",
         icon: "success",
@@ -169,11 +174,6 @@ class ListNote extends HTMLElement {
         showConfirmButton: false,
         timer: 1500,
       });
-      this._notes.splice(noteIndex, 1);
-      document.dispatchEvent(
-        new CustomEvent("notes-updated", { detail: { notes: this._notes } })
-      );
-      this._renderNotes(this._notes);
     }
   }
 }
