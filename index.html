@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Notes App adalah aplikasi catatan sederhana untuk pencatatan.">
+    <title>Notes App</title>
+
+    <link rel="icon" href="images/favicon.png" sizes="512x512" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <header-bar></header-bar>
+    </header>
+
+    <main class="main-content">
+      <div class="container">
+        <div class="content-inner">
+          <div class="add-search-note">
+            <add-note title="Tambahkan Catatan"></add-note>
+            <search-note title="Cari Catatan"></search-note>
+          </div>
+          <list-note title="Daftar Catatan"></list-note>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <footer-bar></footer-bar>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>
