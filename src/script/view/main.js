@@ -5,6 +5,15 @@ function main() {
 
   const createNote = async (note) => {
     try {
+      Swal.fire({
+        title: "Loading",
+        text: "Sedang menyimpan catatan...",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+
       const options = {
         method: "POST",
         headers: {
@@ -15,10 +24,17 @@ function main() {
 
       const response = await fetch(`${baseUrl}/notes`, options);
       const responseJson = await response.json();
-      showResponseMessage(responseJson.status, responseJson.message);
-      getNotesNonArchived();
+
+      setTimeout(() => {
+        Swal.close();
+        showResponseMessage(responseJson.status, responseJson.message);
+        getNotesNonArchived();
+      }, 1000);
     } catch (error) {
-      showResponseMessage("error", error.message);
+      setTimeout(() => {
+        Swal.close();
+        showResponseMessage("error", error.message);
+      }, 1000);
     }
   };
 
