@@ -51,10 +51,174 @@ body {
   gap: 2rem;
 }
 
+.add-note h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.5em;
+  color: var(--primary-color);
+}
+
+.add-note .input-group {
+  margin: 0 0 1rem 0;
+}
+
+.add-note .input-group textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.add-note .form-label {
+  display: block;
+  margin: 0 0 5px 0;
+  font-size: 1em;
+  color: var(--dark-color);
+  width: fit-content;
+}
+
+.add-note .form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  border: 1px solid var(--tertiary-color);
+  box-sizing: border-box;
+  outline: none;
+}
+
+.add-note .form-control:focus {
+  border: 1px solid var(--tertiary-color);
+  box-shadow: 0 0 0 0.25rem rgba(0, 74, 173, 0.25);
+}
+
+.add-note .add-button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  cursor: pointer;
+  border: none;
+}
+
+.add-note .add-button:hover {
+  background-color: blue;
+}
+
+.add-note .add-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(0, 74, 173, 0.25);
+}
+
+.add-note .add-button i {
+  margin: 0 0 0 5px;
+}
+
+.add-note .form-control.error {
+  border-color: red;
+}
+
+.add-note .form-control.success {
+  border-color: green;
+}
+
+.add-note .error-message {
+  color: red;
+  font-size: 0.8em;
+  margin: 5px 0 0 0;
+}
+
+.add-note .form-info {
+  font-size: 0.9em;
+  color: #555;
+  margin: 0 0 5px 0;
+  font-style: italic;
+}
+
 .add-search-note {
   display: grid;
   gap: 1rem;
   grid-template-rows: min-content;
+}
+
+.list-note h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.5em;
+  color: var(--primary-color);
+}
+
+#listNote {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.note-item {
+  padding: 1rem;
+  border-radius: 5px;
+  background-color: var(--light-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.note-item h5 {
+  margin: 0 0 5px 0;
+  font-size: 1.2em;
+  color: var(--secondary-color);
+}
+
+.note-item p {
+  margin: 0 0 10px 0;
+  font-size: 1em;
+  color: var(--dark-color);
+}
+
+.note-item small {
+  font-size: 0.8em;
+  color: var(--dark-color);
+}
+
+.note-item .delete-button {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.note-item .delete-button:hover {
+  background: darkred;
+}
+
+.note-item .delete-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25);
+}
+
+.note-item .archive-button {
+  margin: 5px 0 0 0;
+  padding: 5px;
+  border-radius: 5px;
+  background: green;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.note-item .archive-button:hover {
+  background: darkgreen;
+}
+
+.note-item .archive-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(0, 128, 0, 0.25);
 }
 
 /* FOOTER */
@@ -80,6 +244,10 @@ footer {
 
   .content-inner {
     grid-template-columns: 1fr 1fr;
+  }
+
+  #listNote {
+    grid-template-columns: 1fr;
   }
 }
 

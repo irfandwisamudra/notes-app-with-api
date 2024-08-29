@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Notes App adalah aplikasi catatan sederhana untuk pencatatan.">
+      content="Notes App adalah aplikasi catatan sederhana untuk pencatatan."
+    />
     <title>Notes App</title>
 
     <link
@@ -22,10 +23,56 @@
       <div class="container">
         <div class="content-inner">
           <div class="add-search-note">
-            <add-note title="Tambahkan Catatan"></add-note>
-            <search-note title="Cari Catatan"></search-note>
+            <section class="add-note">
+              <h4>Tambahkan Catatan</h4>
+              <form id="addNote">
+                <div class="input-group">
+                  <label class="form-label" for="inputNoteTitle"
+                    >Judul (Wajib)</label
+                  >
+                  <div class="form-info">Contoh: "Belajar Laravel 11"</div>
+                  <input
+                    class="form-control"
+                    id="inputNoteTitle"
+                    type="text"
+                    name="title"
+                    enterkeyhint="next"
+                    required
+                  />
+                  <div class="error-message" id="titleError"></div>
+                </div>
+                <div class="input-group">
+                  <label class="form-label" for="inputNoteDescription"
+                    >Deskripsi (Wajib)</label
+                  >
+                  <div class="form-info">
+                    Contoh: "Menonton video playlist Tutorial Laravel 11 di
+                    channel Youtube Web Programming UNPAS"
+                  </div>
+                  <textarea
+                    class="form-control"
+                    id="inputNoteDescription"
+                    rows="3"
+                    name="description"
+                    required
+                  ></textarea>
+                  <div class="error-message" id="descriptionError"></div>
+                </div>
+                <div class="input-group">
+                  <button class="add-button" type="submit">
+                    Tambah
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                  </button>
+                </div>
+              </form>
+            </section>
           </div>
-          <list-note title="Daftar Catatan"></list-note>
+          <div class="list-note">
+            <section>
+              <h4>Daftar Catatan</h4>
+              <div id="listNote"></div>
+            </section>
+          </div>
         </div>
       </div>
     </main>
