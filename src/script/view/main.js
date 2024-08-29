@@ -5,14 +5,8 @@ function main() {
 
   const createNote = async (note) => {
     try {
-      Swal.fire({
-        title: "Loading",
-        text: "Sedang menyimpan catatan...",
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading();
-        },
-      });
+      const loadingIndicator = document.createElement("loading-indicator");
+      document.body.appendChild(loadingIndicator);
 
       const options = {
         method: "POST",
@@ -26,13 +20,13 @@ function main() {
       const responseJson = await response.json();
 
       setTimeout(() => {
-        Swal.close();
+        document.body.removeChild(loadingIndicator);
         showResponseMessage(responseJson.status, responseJson.message);
         getNotesNonArchived();
       }, 1000);
     } catch (error) {
       setTimeout(() => {
-        Swal.close();
+        document.body.removeChild(loadingIndicator);
         showResponseMessage("error", error.message);
       }, 1000);
     }
