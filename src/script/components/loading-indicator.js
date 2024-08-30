@@ -1,9 +1,9 @@
 class LoadingIndicator extends HTMLElement {
   constructor() {
     super();
-    const shadow = this.attachShadow({ mode: "open" });
-    const wrapper = document.createElement("div");
-    wrapper.setAttribute("class", "loading-wrapper");
+    const shadow = this.attachShadow({ mode: 'open' });
+    const wrapper = document.createElement('div');
+    wrapper.setAttribute('class', 'loading-wrapper');
     wrapper.innerHTML = `
       <style>
         .loading-wrapper {
@@ -37,4 +37,4 @@ class LoadingIndicator extends HTMLElement {
   }
 }
 
-customElements.define("loading-indicator", LoadingIndicator);
+customElements.define('loading-indicator', LoadingIndicator);

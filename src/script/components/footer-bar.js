@@ -1,8 +1,8 @@
 class FooterBar extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
   }
 
   _updateStyle() {
@@ -54,7 +54,7 @@ class FooterBar extends HTMLElement {
   }
 
   _emptyContent() {
-    this._shadowRoot.innerHTML = "";
+    this._shadowRoot.innerHTML = '';
   }
 
   connectedCallback() {
@@ -107,4 +107,4 @@ class FooterBar extends HTMLElement {
   }
 }
 
-customElements.define("footer-bar", FooterBar);
+customElements.define('footer-bar', FooterBar);

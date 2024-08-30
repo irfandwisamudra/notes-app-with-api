@@ -1,7 +1,7 @@
-import "./styles/style.css";
-import "./script/components/index.js";
-import main from "./script/view/main.js";
+import './styles/style.css';
+import './script/components/index.js';
+import main from './script/view/main.js';
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   main();
 });

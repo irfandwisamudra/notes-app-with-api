@@ -1,8 +1,8 @@
 class HeaderBar extends HTMLElement {
   constructor() {
     super();
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._style = document.createElement('style');
   }
 
   _updateStyle() {
@@ -98,15 +98,15 @@ class HeaderBar extends HTMLElement {
   }
 
   startCarousel() {
-    const slides = this._shadowRoot.querySelectorAll(".slide");
+    const slides = this._shadowRoot.querySelectorAll('.slide');
     let currentSlide = 0;
 
     const showSlide = (index) => {
       slides.forEach((slide) => {
-        slide.style.display = "none";
+        slide.style.display = 'none';
       });
 
-      slides[index].style.display = "block";
+      slides[index].style.display = 'block';
     };
 
     const nextSlide = () => {
@@ -122,4 +122,4 @@ class HeaderBar extends HTMLElement {
   }
 }
 
-customElements.define("header-bar", HeaderBar);
+customElements.define('header-bar', HeaderBar);
