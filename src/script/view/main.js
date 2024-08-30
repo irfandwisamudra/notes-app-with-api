@@ -6,9 +6,9 @@ function main() {
 
   const createNote = async (note) => {
     const loadingIndicator = document.createElement('loading-indicator');
-    try {
-      document.body.appendChild(loadingIndicator);
+    document.body.appendChild(loadingIndicator);
 
+    try {
       const options = {
         method: 'POST',
         headers: {
@@ -21,15 +21,15 @@ function main() {
       const responseJson = await response.json();
 
       setTimeout(() => {
-        document.body.removeChild(loadingIndicator);
         showResponseMessage(responseJson.status, responseJson.message);
         getNotesNonArchived();
       }, 1000);
     } catch (error) {
       setTimeout(() => {
-        document.body.removeChild(loadingIndicator);
         showResponseMessage('error', error.message);
       }, 1000);
+    } finally {
+      document.body.removeChild(loadingIndicator);
     }
   };
 
@@ -77,9 +77,9 @@ function main() {
 
   const archiveNote = async (noteId) => {
     const loadingIndicator = document.createElement('loading-indicator');
-    try {
-      document.body.appendChild(loadingIndicator);
+    document.body.appendChild(loadingIndicator);
 
+    try {
       const options = {
         method: 'POST',
         headers: {
@@ -93,21 +93,21 @@ function main() {
       );
       const responseJson = await response.json();
 
-      document.body.removeChild(loadingIndicator);
       showResponseMessage(responseJson.status, responseJson.message);
       getNotesNonArchived();
       getArchivedNotes();
     } catch (error) {
-      document.body.removeChild(loadingIndicator);
       showResponseMessage('error', error.message);
+    } finally {
+      document.body.removeChild(loadingIndicator);
     }
   };
 
   const unarchiveNote = async (noteId) => {
     const loadingIndicator = document.createElement('loading-indicator');
-    try {
-      document.body.appendChild(loadingIndicator);
+    document.body.appendChild(loadingIndicator);
 
+    try {
       const options = {
         method: 'POST',
         headers: {
@@ -121,21 +121,21 @@ function main() {
       );
       const responseJson = await response.json();
 
-      document.body.removeChild(loadingIndicator);
       showResponseMessage(responseJson.status, responseJson.message);
       getNotesNonArchived();
       getArchivedNotes();
     } catch (error) {
-      document.body.removeChild(loadingIndicator);
       showResponseMessage('error', error.message);
+    } finally {
+      document.body.removeChild(loadingIndicator);
     }
   };
 
   const deleteNote = async (noteId) => {
     const loadingIndicator = document.createElement('loading-indicator');
-    try {
-      document.body.appendChild(loadingIndicator);
+    document.body.appendChild(loadingIndicator);
 
+    try {
       const options = {
         method: 'DELETE',
         headers: {
@@ -146,13 +146,13 @@ function main() {
       const response = await fetch(`${baseUrl}/notes/${noteId}`, options);
       const responseJson = await response.json();
 
-      document.body.removeChild(loadingIndicator);
       showResponseMessage(responseJson.status, responseJson.message);
       getNotesNonArchived();
       getArchivedNotes();
     } catch (error) {
-      document.body.removeChild(loadingIndicator);
       showResponseMessage('error', error.message);
+    } finally {
+      document.body.removeChild(loadingIndicator);
     }
   };
 
