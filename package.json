@@ -23,6 +23,7 @@
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
+    "gsap": "^3.12.5",
     "sweetalert2": "^11.12.4"
   }
 }

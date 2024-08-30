@@ -1,11 +1,12 @@
 import Swal from "sweetalert2";
+import { gsap } from "gsap";
 
 function main() {
   const baseUrl = "https://notes-api.dicoding.dev/v2";
 
   const createNote = async (note) => {
+    const loadingIndicator = document.createElement("loading-indicator");
     try {
-      const loadingIndicator = document.createElement("loading-indicator");
       document.body.appendChild(loadingIndicator);
 
       const options = {
@@ -75,8 +76,8 @@ function main() {
   };
 
   const archiveNote = async (noteId) => {
+    const loadingIndicator = document.createElement("loading-indicator");
     try {
-      const loadingIndicator = document.createElement("loading-indicator");
       document.body.appendChild(loadingIndicator);
 
       const options = {
@@ -103,8 +104,8 @@ function main() {
   };
 
   const unarchiveNote = async (noteId) => {
+    const loadingIndicator = document.createElement("loading-indicator");
     try {
-      const loadingIndicator = document.createElement("loading-indicator");
       document.body.appendChild(loadingIndicator);
 
       const options = {
@@ -131,8 +132,8 @@ function main() {
   };
 
   const deleteNote = async (noteId) => {
+    const loadingIndicator = document.createElement("loading-indicator");
     try {
-      const loadingIndicator = document.createElement("loading-indicator");
       document.body.appendChild(loadingIndicator);
 
       const options = {
@@ -178,7 +179,7 @@ function main() {
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
     );
 
-    sortedNotes.forEach((note) => {
+    sortedNotes.forEach((note, index) => {
       const noteItem = document.createElement("div");
       noteItem.className = "note-item";
       noteItem.innerHTML = `
@@ -189,6 +190,16 @@ function main() {
         <button class="archive-button" data-id="${note.id}">Arsipkan</button>
       `;
       listNote.appendChild(noteItem);
+
+      gsap.from(noteItem, {
+        opacity: 0,
+        y: 50,
+        scale: 0.8,
+        rotation: 10,
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: "back.out(1.7)",
+      });
 
       noteItem
         .querySelector(".delete-button")
@@ -321,7 +332,7 @@ function main() {
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
     );
 
-    sortedNotes.forEach((note) => {
+    sortedNotes.forEach((note, index) => {
       const noteItem = document.createElement("div");
       noteItem.className = "note-item";
       noteItem.innerHTML = `
@@ -332,6 +343,16 @@ function main() {
         <button class="unarchive-button" data-id="${note.id}">Unarchive</button>
       `;
       listArchivedNote.appendChild(noteItem);
+
+      gsap.from(noteItem, {
+        opacity: 0,
+        y: 50,
+        scale: 0.8,
+        rotation: 10,
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: "back.out(1.7)",
+      });
 
       noteItem
         .querySelector(".delete-button")
