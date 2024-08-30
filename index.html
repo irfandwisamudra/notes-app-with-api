@@ -22,7 +22,7 @@
     <main class="main-content">
       <div class="container">
         <div class="content-inner">
-          <div class="add-search-note">
+          <div class="add-archived-note">
             <section class="add-note">
               <h4>Tambahkan Catatan</h4>
               <form id="addNote">
@@ -66,6 +66,14 @@
                 </div>
               </form>
             </section>
+
+            <section class="archived-note">
+              <h4>Arsip Catatan</h4>
+              <button class="archived-button" id="archivedButton">
+                Lihat Catatan yang Diarsipkan
+                <i class="fa-solid fa-box-archive"></i>
+              </button>
+            </section>
           </div>
           <div class="list-note">
             <section>
@@ -76,6 +84,18 @@
         </div>
       </div>
     </main>
+
+    <div id="archivedModal" class="modal">
+      <div class="modal-content">
+        <div class="list-archived-note">
+        <span class="close">&times;</span>
+          <section>
+            <h4>Catatan yang Diarsipkan</h4>
+            <div id="listArchivedNote"></div>
+          </section>
+        </div>
+      </div>
+    </div>
 
     <footer>
       <div class="container">

@@ -39,7 +39,7 @@ function main() {
       if (responseJson.error) {
         showResponseMessage(responseJson.status, responseJson.message);
       } else {
-        renderAllNotes(responseJson.data);
+        renderNonArchivedNotes(responseJson.data);
       }
     } catch (error) {
       showResponseMessage("error", error.message);
@@ -53,7 +53,7 @@ function main() {
       if (responseJson.error) {
         showResponseMessage(responseJson.status, responseJson.message);
       } else {
-        renderAllNotes(responseJson.data);
+        renderArchivedNotes(responseJson.data);
       }
     } catch (error) {
       showResponseMessage("error", error.message);
@@ -76,6 +76,9 @@ function main() {
 
   const archiveNote = async (noteId) => {
     try {
+      const loadingIndicator = document.createElement("loading-indicator");
+      document.body.appendChild(loadingIndicator);
+
       const options = {
         method: "POST",
         headers: {
@@ -88,15 +91,22 @@ function main() {
         options
       );
       const responseJson = await response.json();
+
+      document.body.removeChild(loadingIndicator);
       showResponseMessage(responseJson.status, responseJson.message);
       getNotesNonArchived();
+      getArchivedNotes();
     } catch (error) {
+      document.body.removeChild(loadingIndicator);
       showResponseMessage("error", error.message);
     }
   };
 
   const unarchiveNote = async (noteId) => {
     try {
+      const loadingIndicator = document.createElement("loading-indicator");
+      document.body.appendChild(loadingIndicator);
+
       const options = {
         method: "POST",
         headers: {
@@ -109,15 +119,22 @@ function main() {
         options
       );
       const responseJson = await response.json();
+
+      document.body.removeChild(loadingIndicator);
       showResponseMessage(responseJson.status, responseJson.message);
+      getNotesNonArchived();
       getArchivedNotes();
     } catch (error) {
+      document.body.removeChild(loadingIndicator);
       showResponseMessage("error", error.message);
     }
   };
 
   const deleteNote = async (noteId) => {
     try {
+      const loadingIndicator = document.createElement("loading-indicator");
+      document.body.appendChild(loadingIndicator);
+
       const options = {
         method: "DELETE",
         headers: {
@@ -127,9 +144,13 @@ function main() {
 
       const response = await fetch(`${baseUrl}/notes/${noteId}`, options);
       const responseJson = await response.json();
+
+      document.body.removeChild(loadingIndicator);
       showResponseMessage(responseJson.status, responseJson.message);
       getNotesNonArchived();
+      getArchivedNotes();
     } catch (error) {
+      document.body.removeChild(loadingIndicator);
       showResponseMessage("error", error.message);
     }
   };
@@ -144,9 +165,14 @@ function main() {
     });
   };
 
-  const renderAllNotes = (notes) => {
+  const renderNonArchivedNotes = (notes) => {
     const listNote = document.getElementById("listNote");
     listNote.innerHTML = "";
+
+    if (notes.length === 0) {
+      listNote.innerHTML = "<p>Tidak ada catatan yang tersedia.</p>";
+      return;
+    }
 
     const sortedNotes = notes.sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -185,24 +211,13 @@ function main() {
       noteItem
         .querySelector(".archive-button")
         .addEventListener("click", async () => {
-          const result = await Swal.fire({
-            title: "Konfirmasi Arsip",
-            text: "Apakah Anda yakin ingin mengarsipkan catatan ini?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Ya, arsipkan!",
-            cancelButtonText: "Batal",
-          });
-          if (result.isConfirmed) {
-            archiveNote(note.id);
-          }
+          archiveNote(note.id);
         });
     });
   };
 
   getNotesNonArchived();
+  getArchivedNotes();
 
   const form = document.querySelector("#addNote");
   const titleInput = document.querySelector("#inputNoteTitle");
@@ -278,6 +293,70 @@ function main() {
       titleInput.value = "";
       descriptionInput.value = "";
     }
+  }
+
+  function openModal() {
+    document.getElementById("archivedModal").style.display = "block";
+  }
+
+  function closeModal() {
+    document.getElementById("archivedModal").style.display = "none";
+  }
+
+  document
+    .getElementById("archivedButton")
+    .addEventListener("click", openModal);
+  document.querySelector(".close").addEventListener("click", closeModal);
+
+  function renderArchivedNotes(notes) {
+    const listArchivedNote = document.getElementById("listArchivedNote");
+    listArchivedNote.innerHTML = "";
+
+    if (notes.length === 0) {
+      listArchivedNote.innerHTML = "<p>Tidak ada catatan yang diarsipkan.</p>";
+      return;
+    }
+
+    const sortedNotes = notes.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+
+    sortedNotes.forEach((note) => {
+      const noteItem = document.createElement("div");
+      noteItem.className = "note-item";
+      noteItem.innerHTML = `
+        <button class="delete-button" data-id="${note.id}">&times;</button>
+        <h5>${note.title}</h5>
+        <p>${note.body}</p>
+        <small>${new Date(note.createdAt).toLocaleString()}</small>
+        <button class="unarchive-button" data-id="${note.id}">Unarchive</button>
+      `;
+      listArchivedNote.appendChild(noteItem);
+
+      noteItem
+        .querySelector(".delete-button")
+        .addEventListener("click", async () => {
+          const result = await Swal.fire({
+            title: "Konfirmasi Hapus",
+            text: "Apakah Anda yakin ingin menghapus catatan ini?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Ya, hapus!",
+            cancelButtonText: "Batal",
+          });
+          if (result.isConfirmed) {
+            deleteNote(note.id);
+          }
+        });
+
+      noteItem
+        .querySelector(".unarchive-button")
+        .addEventListener("click", async () => {
+          unarchiveNote(note.id);
+        });
+    });
   }
 }
 

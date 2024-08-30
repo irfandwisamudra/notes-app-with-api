@@ -133,19 +133,22 @@ body {
   font-style: italic;
 }
 
-.add-search-note {
+.add-archived-note {
   display: grid;
   gap: 1rem;
   grid-template-rows: min-content;
 }
 
-.list-note h4 {
+.list-note h4,
+.archived-note h4,
+.list-archived-note h4 {
   margin: 0 0 10px 0;
   font-size: 1.5em;
   color: var(--primary-color);
 }
 
-#listNote {
+#listNote,
+#listArchivedNote {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: 1fr 1fr;
@@ -200,11 +203,12 @@ body {
   box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25);
 }
 
-.note-item .archive-button {
+.note-item .archive-button,
+.note-item .unarchive-button {
   margin: 5px 0 0 0;
   padding: 5px;
   border-radius: 5px;
-  background: green;
+  background: coral;
   color: white;
   border: none;
   display: flex;
@@ -213,12 +217,84 @@ body {
   cursor: pointer;
 }
 
-.note-item .archive-button:hover {
-  background: darkgreen;
+.note-item .archive-button:hover,
+.note-item .unarchive-button:hover {
+  background: red;
 }
 
-.note-item .archive-button:focus {
-  box-shadow: 0 0 0 0.25rem rgba(0, 128, 0, 0.25);
+.note-item .archive-button:focus,
+.note-item .unarchive-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25);
+}
+
+.archived-note .archived-button i {
+  margin: 0 0 0 5px;
+}
+
+.archived-button {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: coral;
+  color: var(--light-color);
+  cursor: pointer;
+  border: none;
+}
+
+.archived-button:hover {
+  background-color: red;
+}
+
+.archived-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation: fadeIn 0.5s;
+  position: relative;
+}
+
+.close {
+  color: #aaa;
+  position: absolute;
+  right: 10px;
+  top: 0;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* FOOTER */
@@ -246,7 +322,8 @@ footer {
     grid-template-columns: 1fr 1fr;
   }
 
-  #listNote {
+  #listNote,
+  #listArchivedNote {
     grid-template-columns: 1fr;
   }
 }
